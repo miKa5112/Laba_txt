@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Сторінка з посиланнями</title>
+    <style>
+        .yellow-box {
+            background-color: yellow;
+            padding: 20px;
+            border: 2px solid black;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Посилання</h1>
+    <button class="button" onclick="loadLanguages()">Мови</button>
+    <button class="button" onclick="loadStudents()">Студенти</button>
+    
+    <div class="yellow-box" id="content"></div>
+
+    <script>
+        function loadLanguages() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var languages = JSON.parse(this.responseText);
+                    var contentDiv = document.getElementById("content");
+                    contentDiv.innerText = "Мови програмування: " + languages.join(", ");
+                }
+            };
+            xhttp.open("GET", "1.txt", true);
+            xhttp.send();
+        }
+
+        function loadStudents() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var students = JSON.parse(this.responseText);
+                    var contentDiv = document.getElementById("content");
+                    contentDiv.innerText = "Студенти: " + students.join(", ");
+                }
+            };
+            xhttp.open("GET", "2.txt", true);
+            xhttp.send();
+        }
+    </script>
+</body>
+</html>
